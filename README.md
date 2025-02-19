@@ -1,0 +1,3 @@
+- [ ] Fazer o Upload de Imagens localmente
+- [ ] Criar uma rota que liste todos os ícones
+- [ ] Poder 

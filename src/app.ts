@@ -17,6 +17,7 @@ app.get("/", async (c) => {
 
     stream.close();
   });
+
 });
 
 export default app;

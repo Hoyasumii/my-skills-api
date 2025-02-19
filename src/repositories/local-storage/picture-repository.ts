@@ -1,6 +1,6 @@
 import process from "node:process";
 import { PictureRepositoryInterface } from "@/repositories";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
 export class PictureRepository implements PictureRepositoryInterface {
@@ -15,11 +15,19 @@ export class PictureRepository implements PictureRepositoryInterface {
     return true;
   }
 
-  async getPicture(name: string): Promise<Buffer> {
-    const targetFile = path.join(this.pwd, `data/${name}`);
+  async getPictures(...pictures: Array<string>): Promise<Array<string>> {
+    pictures = pictures.map((picture) =>
+      path.join(this.pwd, `data/${picture}.png`)
+    );
 
-    const fileBuffer = await readFile(targetFile);
+    return pictures;
+  }
 
-    return Buffer.from(fileBuffer);
+  async getAll(): Promise<Array<string>> {
+    let content: Array<string> = await readdir(path.join(this.pwd, "data"));
+
+    content = content.map((item) => item.split(".")[0]);
+
+    return content;
   }
 }

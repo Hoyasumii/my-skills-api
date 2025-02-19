@@ -1,4 +1,5 @@
 export interface PictureRepositoryInterface {
   uploadPicture(name: string, file: File): Promise<boolean>;
-  getPicture(name: string): Promise<Buffer>;
+  getPictures(...pictures: Array<string>): Promise<Array<string>>;
+  getAll(): Promise<Array<string>>;
 }

@@ -36,7 +36,18 @@ export class GettingPictures
     for (const picture of content) {
       const selectedTheme = theme === "dark" ? "#242938" : "#f4f2ec";
 
-      if (!existsSync(picture)) throw new Error();
+      const fileExists = existsSync(picture);
+
+      const transparentPicture = await sharp({
+        create: {
+          width: 1000,
+          height: 1000,
+          channels: 4,
+          background: { alpha: 0, r: 255, g: 255, b: 255 },
+        },
+      })
+        .png()
+        .toBuffer();
 
       const background = `<svg width="${size}" height="${size}">
       <rect x="0" y="0" width="${size}" height="${size}" rx="10" ry="10" fill="${selectedTheme}"/>
@@ -47,7 +58,7 @@ export class GettingPictures
           .resize(size, size)
           .composite([
             {
-              input: await sharp(picture)
+              input: await sharp(fileExists ? picture : transparentPicture)
                 .resize(size, size)
                 .composite([
                   { input: Buffer.from(background), blend: "dest-in" },

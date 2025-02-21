@@ -17,7 +17,7 @@ export class PictureRepository implements PictureRepositoryInterface {
 
   async getPictures(...pictures: Array<string>): Promise<Array<string>> {
     pictures = pictures.map((picture) =>
-      path.join(this.pwd, `data/${picture}.png`)
+      path.join(this.pwd, `data/${picture}.svg`)
     );
 
     return pictures;

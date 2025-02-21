@@ -1,3 +1,40 @@
-- [ ] Fazer o Upload de Imagens localmente
+- [ ] Fazer o Upload de SVG localmente
 - [ ] Criar uma rota que liste todos os ícones
-- [ ] Poder 
+- [x] Armazenar as imagens em svg e salvá-las tbm em svg(recebendo uma string como argumento ao invés de um form)
+- [x] Retornar um WEBP ao invés de um PNG
+- [ ] Adicionar os ícones Iniciais
+  - [x] HTML
+  - [x] CSS
+  - [x] JAVASCRIPT
+  - [x] TYPESCRIPT
+  - [x] NODE
+  - [x] FASTIFY
+  - [x] HONO
+  - [x] PRISMA
+  - [ ] DRIZZLE
+  - [ ] TYPEORM
+  - [ ] SEQUELIZE
+  - [ ] DENO
+  - [ ] BUN
+  - [ ] ELYSIA
+  - [ ] PYTHON
+  - [ ] PHP
+  - [ ] EXPRESS
+  - [ ] DOCKER
+  - [ ] VITEST
+  - [ ] JEST
+  - [ ] REACT
+  - [ ] NEXT
+  - [ ] SASS
+  - [ ] TAILWIND
+  - [ ] BOOTSTRAP
+  - [ ] ANTD
+  - [ ] MATERIALUI
+  - [ ] SHADCN-UI
+  - [ ] MONGODB
+  - [x] ZOD
+  - [ ] PNPM
+  - [ ] YARN
+  - [ ] NPM
+  - [x] ZUSTAND
+  - [ ] NEST

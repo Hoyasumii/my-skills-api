@@ -29,41 +29,43 @@ export class GettingPictures
     if (!theme) theme = "dark";
     if (!size) size = 48;
     if (!spacing) spacing = 5;
-    if (!iconsPerLine) iconsPerLine = 5;
+    if (!iconsPerLine) iconsPerLine = 15;
 
     content = await this.repository.getPictures(...content);
 
     for (const picture of content) {
-      const selectedTheme = theme === "dark" ? "#242938" : "#f4f2ec";
+      const selectedTheme = theme === "dark" ? "#1f2937" : "#e5e7eb";
 
       const fileExists = existsSync(picture);
 
       const transparentPicture = await sharp({
         create: {
-          width: 1000,
-          height: 1000,
+          width: 512,
+          height: 512,
           channels: 4,
           background: { alpha: 0, r: 255, g: 255, b: 255 },
         },
       })
-        .png()
+        .webp()
         .toBuffer();
 
-      const background = `<svg width="${size}" height="${size}">
-      <rect x="0" y="0" width="${size}" height="${size}" rx="10" ry="10" fill="${selectedTheme}"/>
-    </svg>`;
+      const background = `<svg width="512" height="512">
+        <rect x="0" y="0" width="512" height="512" rx="50" ry="50" fill="${selectedTheme}"/>
+      </svg>`;
+
+      const resizedImage = await sharp(
+        fileExists ? picture : transparentPicture
+      )
+        .resize(size, size)
+        .toFormat("webp")
+        .toBuffer();
 
       pictures.push(
         await sharp(Buffer.from(background))
           .resize(size, size)
           .composite([
             {
-              input: await sharp(fileExists ? picture : transparentPicture)
-                .resize(size, size)
-                .composite([
-                  { input: Buffer.from(background), blend: "dest-in" },
-                ])
-                .toBuffer(),
+              input: resizedImage,
               blend: "over",
             },
           ])
@@ -86,7 +88,7 @@ export class GettingPictures
       },
     })
       .composite(compositeContent)
-      .toFormat("png")
+      .toFormat("webp")
       .toBuffer();
   }
 }

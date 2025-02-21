@@ -24,7 +24,7 @@ app.get("/", async (c) => {
       iconsPerLine === undefined ? undefined : parseInt(iconsPerLine),
   });
 
-  return c.body(pictureStream, 200, { "Content-Type": "image/png" });
+  return c.body(pictureStream, 200, { "Content-Type": "image/webp" });
 });
 
 export default app;

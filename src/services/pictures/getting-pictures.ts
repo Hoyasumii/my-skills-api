@@ -47,7 +47,11 @@ export class GettingPictures
         fileExists ? picture : transparentPicture
       )
         .resize(size, size)
-        .toFormat("webp")
+        .toFormat("webp", {
+          quality: 100,
+          lossless: true,
+          nearLossless: true,
+        })
         .toBuffer();
 
       pictures.push(
@@ -81,7 +85,7 @@ export class GettingPictures
       .toFormat("webp", {
         quality: 100,
         lossless: true,
-        nearLossless: true
+        nearLossless: true,
       })
       .toBuffer();
   }

@@ -78,7 +78,11 @@ export class GettingPictures
       },
     })
       .composite(compositeicons)
-      .toFormat("webp")
+      .toFormat("webp", {
+        quality: 100,
+        lossless: true,
+        nearLossless: true
+      })
       .toBuffer();
   }
 }

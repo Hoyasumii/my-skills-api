@@ -17,7 +17,7 @@ export class GettingPictures
     spacing,
     theme,
   }: GetPictureModel): Promise<Buffer> {
-    const pictures: Array<Buffer<ArrayBufferLike>> = [];
+    const pictures: Array<Buffer> = [];
 
     if (icons[0] === "all") icons = await this.repository.getAll();
 

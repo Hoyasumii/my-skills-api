@@ -7,7 +7,7 @@ type ProcessPictureBufferReturn = {
 };
 
 export function processPictureBuffer(
-  pictures: Array<Buffer<ArrayBufferLike>>,
+  pictures: Array<Buffer>,
   iconsPerLine: number,
   size: number,
   spacing: number

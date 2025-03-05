@@ -10,7 +10,7 @@ pictureRoutes.get("/", zValidator("query", GetPictureModel), async (c) => {
 
   const service = makeGettingPicture();
 
-  return c.body(await service.run(data), 200, { "Content-Type": "image/webp" });
+  return c.body(new Uint8Array(await service.run(data)), 200, { "Content-Type": "image/webp" });
 });
 
 pictureRoutes.get("/list", async (c) => {

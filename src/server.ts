@@ -4,7 +4,7 @@ import { serve } from "@hono/node-server";
 serve(
   {
     fetch: app.fetch,
-    port: 8080,
+    port: parseInt(process.env.PORT),
   },
   (info) => {
     console.log(`Server is running on http://${info.address}:${info.port}`);

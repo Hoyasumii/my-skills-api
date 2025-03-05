@@ -1,39 +1,29 @@
+import { GetPictureModel } from "@/models/pictures";
 import { PictureRepositoryInterface } from "@/repositories";
 import { Service } from "@/services";
 import { processPictureBuffer } from "@/utils";
 import { existsSync } from "node:fs";
 import sharp from "sharp";
 
-type GettingPicturesProps = {
-  content: Array<string>;
-  theme?: "dark" | "white";
-  size?: 32 | 48 | 64;
-  spacing?: 0 | 5 | 10;
-  iconsPerLine?: number;
-};
-
 export class GettingPictures
-  implements Service<PictureRepositoryInterface, GettingPicturesProps, Buffer>
+  implements Service<PictureRepositoryInterface, GetPictureModel, Buffer>
 {
   constructor(public repository: PictureRepositoryInterface) {}
 
   async run({
-    content,
+    icons,
     iconsPerLine,
     size,
     spacing,
     theme,
-  }: GettingPicturesProps): Promise<Buffer> {
+  }: GetPictureModel): Promise<Buffer> {
     const pictures: Array<Buffer<ArrayBufferLike>> = [];
 
-    if (!theme) theme = "dark";
-    if (!size) size = 48;
-    if (!spacing) spacing = 5;
-    if (!iconsPerLine) iconsPerLine = 15;
+    if (icons[0] === "all") icons = await this.repository.getAll();
 
-    content = await this.repository.getPictures(...content);
+    icons = await this.repository.getPictures(...icons);
 
-    for (const picture of content) {
+    for (const picture of icons) {
       const selectedTheme = theme === "dark" ? "#1f2937" : "#e5e7eb";
 
       const fileExists = existsSync(picture);
@@ -74,7 +64,7 @@ export class GettingPictures
     }
 
     const {
-      content: compositeContent,
+      content: compositeicons,
       height,
       width,
     } = processPictureBuffer(pictures, iconsPerLine, size, spacing);
@@ -87,7 +77,7 @@ export class GettingPictures
         background: { alpha: 0, r: 255, g: 255, b: 255 },
       },
     })
-      .composite(compositeContent)
+      .composite(compositeicons)
       .toFormat("webp")
       .toBuffer();
   }

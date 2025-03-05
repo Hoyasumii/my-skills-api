@@ -1,1 +1,1 @@
-export { PictureRepositoryInterface } from "./picture-repository-interface";
+export { type PictureRepositoryInterface } from "./picture-repository-interface";

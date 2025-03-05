@@ -2,7 +2,9 @@
   "name": "api",
   "type": "module",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "build": "tsup src/server.ts",
+    "start": "node dist/server.cjs"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
@@ -17,6 +19,7 @@
     "@types/node": "^20.11.17",
     "eslint": "^9.20.1",
     "globals": "^15.15.0",
+    "tsup": "^8.4.0",
     "tsx": "^4.7.1",
     "typescript-eslint": "^8.24.1"
   },

@@ -35,9 +35,7 @@ export class GettingPictures
           channels: 4,
           background: { alpha: 0, r: 255, g: 255, b: 255 },
         },
-      })
-        .webp()
-        .toBuffer();
+      }).toBuffer();
 
       const background = `<svg width="512" height="512">
         <rect x="0" y="0" width="512" height="512" rx="50" ry="50" fill="${selectedTheme}"/>

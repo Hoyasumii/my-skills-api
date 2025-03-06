@@ -1,5 +1,3 @@
-- [ ] Fazer o Upload de SVG localmente
-- [ ] Criar uma rota que liste todos os ícones
 - [x] Armazenar as imagens em svg e salvá-las tbm em svg(recebendo uma string como argumento ao invés de um form)
 - [x] Retornar um WEBP ao invés de um PNG
 - [ ] Adicionar os ícones Iniciais

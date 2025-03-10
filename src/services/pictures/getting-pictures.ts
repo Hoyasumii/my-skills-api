@@ -2,7 +2,6 @@ import { GetPictureModel } from "@/models/pictures";
 import { PictureRepositoryInterface } from "@/repositories";
 import { Service } from "@/services";
 import { processPictureBuffer } from "@/utils";
-import { existsSync } from "node:fs";
 import sharp from "sharp";
 
 export class GettingPictures
@@ -26,7 +25,7 @@ export class GettingPictures
     for (const picture of icons) {
       const selectedTheme = theme === "dark" ? "#1f2937" : "#e5e7eb";
 
-      const fileExists = existsSync(picture);
+      const pictureExists = await this.repository.exists(picture);
 
       const transparentPicture = await sharp({
         create: {
@@ -42,7 +41,7 @@ export class GettingPictures
       </svg>`;
 
       const resizedImage = await sharp(
-        fileExists ? picture : transparentPicture
+        pictureExists ? picture : transparentPicture
       )
         .resize(size, size)
         .toBuffer();

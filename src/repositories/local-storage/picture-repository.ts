@@ -2,6 +2,7 @@ import process from "node:process";
 import { PictureRepositoryInterface } from "@/repositories";
 import { readdir } from "node:fs/promises";
 import path from "node:path";
+import { existsSync } from "node:fs";
 
 export class PictureRepository implements PictureRepositoryInterface {
   public pwd = process.env.PWD!;
@@ -20,5 +21,9 @@ export class PictureRepository implements PictureRepositoryInterface {
     content = content.map((item) => item.split(".")[0]);
 
     return content;
+  }
+
+  async exists(key: string): Promise<boolean> {
+    return existsSync(path.join(this.pwd, `data/${key}.svg`));
   }
 }

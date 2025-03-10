@@ -4,7 +4,8 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src/server.ts",
-    "start": "node dist/server.cjs"
+    "start": "node dist/server.cjs",
+    "pick:content": ""
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",

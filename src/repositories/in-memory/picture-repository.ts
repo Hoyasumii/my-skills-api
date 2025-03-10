@@ -5,7 +5,7 @@ export class PictureRepository implements PictureRepositoryInterface {
   private data: Record<string, string> = database;
 
   async exists(key: string): Promise<boolean> {
-    return this.data[key] !== undefined;
+    return this.data[key] === undefined;
   }
 
   async getAll(): Promise<Array<string>> {

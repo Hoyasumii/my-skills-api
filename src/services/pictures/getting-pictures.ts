@@ -27,22 +27,13 @@ export class GettingPictures
 
       const pictureExists = await this.repository.exists(picture);
 
-      const transparentPicture = await sharp({
-        create: {
-          width: 512,
-          height: 512,
-          channels: 4,
-          background: { alpha: 0, r: 255, g: 255, b: 255 },
-        },
-      }).toBuffer();
-
       const background = `<svg width="512" height="512">
         <rect x="0" y="0" width="512" height="512" rx="50" ry="50" fill="${selectedTheme}"/>
       </svg>`;
 
-      const resizedImage = await sharp(
-        pictureExists ? picture : transparentPicture
-      )
+      if (!pictureExists) continue;
+
+      const resizedImage = await sharp(Buffer.from(picture))
         .resize(size, size)
         .toBuffer();
 

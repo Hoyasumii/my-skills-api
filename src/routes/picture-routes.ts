@@ -5,7 +5,7 @@ import { Hono } from "hono";
 
 export const pictureRoutes = new Hono();
 
-pictureRoutes.get("/", zValidator("query", GetPictureModel), async (c) => {
+pictureRoutes.get("/get", zValidator("query", GetPictureModel), async (c) => {
   const data = c.req.valid("query");
 
   const service = makeGettingPicture();
